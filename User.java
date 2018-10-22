@@ -1,4 +1,4 @@
-package dataStructures;
+package project;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -9,7 +9,7 @@ public class User {
     private String name, surname, birthplace, home, gender;
     private ArrayList<String> studiedAt, workplaces, movies = new ArrayList<String>();
     private Date birthday;
-    private ArrayList<User> friends = new ArrayList<>();
+    private ArrayList<Friendship> friends = new ArrayList<>();
 
     // Constructor
     /* Minimal constructor ,use not advised */
@@ -40,14 +40,6 @@ public class User {
     }
 
     // Getters & Setters
-
-    public ArrayList<User> getFriends() {
-        return friends;
-    }
-
-    public void setFriends(User friend) {
-        this.friends.add(friend);
-    }
 
     public String getGroupcode() {
         return groupcode;
@@ -117,6 +109,14 @@ public class User {
         this.birthday = birthday;
     }
 
+    public ArrayList<Friendship> getFriends() {
+        return friends;
+    }
+
+    public ArrayList<String> getMovies() {
+        return movies;
+    }
+
     // List methods
     public void addWorkplace(String newWorkplace) {
         workplaces.add(newWorkplace);
@@ -130,6 +130,11 @@ public class User {
         movies.add(newMovie);
     }
 
+    public void addFriend(Friendship f) {
+        friends.add(f);
+    }
+
+    // Utility
     private String StringArrayListToString(ArrayList<String> input) {
         if (input.size() < 1)
             return "";
@@ -141,21 +146,21 @@ public class User {
         return output;
     }
 
+    // ToString
     @Override
     public String toString() {
-        return "User{" +
-                "groupcode='" + groupcode + '\'' +
-                ", id='" + id + '\'' +
-                ", name='" + name + '\'' +
-                ", surname='" + surname + '\'' +
-                ", birthplace='" + birthplace + '\'' +
-                ", home='" + home + '\'' +
-                ", gender='" + gender + '\'' +
-                ", studiedAt=" + studiedAt +
-                ", workplaces=" + workplaces +
-                ", movies=" + movies +
-                ", birthday=" + birthday +
-                ", friends=" + friends +
-                '}';
+        String output = id + ",";
+        output += ((name != null) ? name : "") + ",";
+        output += ((surname != null) ? surname : "") + ",";
+        output += ((birthday != null) ? birthday.toString() : "") + ",";
+        output += ((gender != null) ? gender : "") + ",";
+        output += ((birthplace != null) ? birthplace : "") + ",";
+        output += ((studiedAt != null) ? StringArrayListToString(studiedAt) : "") + ",";
+        output += ((workplaces != null) ? StringArrayListToString(workplaces) : "") + ",";
+        output += ((movies != null) ? StringArrayListToString(movies) : "") + ",";
+        output += groupcode;
+
+        return output;
     }
+
 }

@@ -1,4 +1,6 @@
-package dataStructures;
+package project;
+
+import project.User;
 
 import java.io.*;
 import java.time.LocalDate;
@@ -75,8 +77,8 @@ This function does not read any data from Console. This function receives the da
 parameters.
 */
     public static User initializeUser(String groupcode, String id, String name, String surname,
-                               String birthplace, String home, String gender, ArrayList<String> studiedAt,
-                               ArrayList<String> workplaces, ArrayList<String> movies, Date birthday){
+                                      String birthplace, String home, String gender, ArrayList<String> studiedAt,
+                                      ArrayList<String> workplaces, ArrayList<String> movies, Date birthday){
         User user = new User(id,name,surname,birthday,gender,birthplace,home,studiedAt,
                 workplaces,movies,groupcode);
         return user;
@@ -108,7 +110,8 @@ parameters.
 
     //Read friends file, every user has ArrayList of friends
     //setFriends takes input as only one friend not an array
-    public static void readFriends(String filename, Map<String, User> users) throws IOException {
+    public static ArrayList<Friendship> readFriends(String filename, Map<String, User> users) throws IOException {
+        ArrayList<Friendship> friendships = new ArrayList<>();
         BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(filename)));
         br.readLine();
         String line;
@@ -116,7 +119,11 @@ parameters.
             String[] pices = line.split(",");
             User first = users.get(pices[0]);
             User second = users.get(pices[1]);
-            first.setFriends(second);
+            if (UserMap.verifyPair(first, second)){
+                Friendship add = new Friendship(first, second);
+                friendships.add(add);
+            }
         }
+        return friendships;
     }
 }
