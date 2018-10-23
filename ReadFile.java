@@ -64,6 +64,7 @@ public class ReadFile {
 					movies, birthday));
 			allUsers.add(user);
 		}
+		br.close();
 		return allUsers;
 	}
 
@@ -115,6 +116,7 @@ public class ReadFile {
 				friendships.add(add);
 			}
 		}
+		br.close();
 		return friendships;
 	}
 }

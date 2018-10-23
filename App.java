@@ -6,8 +6,7 @@ import java.util.Scanner;
 
 import javax.naming.directory.InvalidAttributesException;
 
-import dsa.CliApliBase;
-import dsa.CliApliBase.Command;
+import project.CliApliBase.Command;
 
 public class App {
 
